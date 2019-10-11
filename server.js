@@ -27,10 +27,12 @@ app.post('/', function (req, res) {
       res.render('index', {weather: null, error: 'Error, please try again'});
     } else {
       let weather = JSON.parse(body)
+      //console.log(weather)
       if(weather.main == undefined){
         res.render('index', {weather: null, error: 'Error, please try again'});
       } else {
-        let weatherText = `It's ${weather.main.temp} degrees(Fahrenheit) in ${weather.name}!`;
+        //console.log((weather.main.temp - 32) * (5/9))
+        let weatherText = `It's ${Math.round((weather.main.temp - 32) * (5/9))} degrees in ${weather.name}!`;
         res.render('index', {weather: weatherText, error: null});
       }
     }
