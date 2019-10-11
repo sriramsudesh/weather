@@ -5,6 +5,11 @@ const app = express()
 
 const apiKey = 'b0c9a3f01116d67e2dc8dd6c285b5c93';
 
+var port = process.env.PORT || process.env.OPENSHIFT_NODEJS_PORT || 8080,
+    ip   = process.env.IP   || process.env.OPENSHIFT_NODEJS_IP || '0.0.0.0',
+    mongoURL = process.env.OPENSHIFT_MONGODB_DB_URL || process.env.MONGO_URL,
+    mongoURLLabel = "";
+
 app.use(express.static('public'));
 app.use(bodyParser.urlencoded({ extended: true }));
 app.set('view engine', 'ejs')
@@ -32,6 +37,11 @@ app.post('/', function (req, res) {
   });
 })
 
+app.listen(port, ip);
+console.log('Server running on http://%s:%s', ip, port);
+
+/*
 app.listen(3000, function () {
   console.log('Example app listening on port 3000!')
 })
+*/
